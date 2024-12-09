@@ -1,0 +1,32 @@
+
+services:
+  mysqld:
+    image: ${image}
+    container_name: 'mysqld'
+    restart: ${restart}
+    ports:
+      - ${port}:3306
+    volumes: 
+      - /etc/localtime:/etc/localtime
+      - ${path}/config_3306:/etc/mysql/conf.d
+      - vol-mysqld:/var/lib/mysql:rw
+    # command: ["sleep", "10m"]         # 调试问题打开用
+    environment:
+      MYSQL_ROOT_PASSWORD:              # root 的默认密码
+    networks:
+      net-custom:
+        # ipv4_address:     # 指定 ip
+        aliases: 
+          - net-mysqld
+
+
+networks: 
+  net-custom:
+    name: ${network}
+    external: true 
+
+    
+volumes:
+  vol-mysqld:
+    external: true
+

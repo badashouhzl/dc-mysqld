@@ -1,0 +1,51 @@
+[mysqld]
+user=mysql
+character-set-server=utf8
+
+# 密码认证方式
+default_authentication_plugin=mysql_native_password
+
+# ONLY_FULL_GROUP_BY: 对于GROUP BY聚合操作，如果在SELECT中的列，没有在GROUP BY中出现，那么这个SQL是不合法的，因为列不在GROUP BY从句中
+# NO_AUTO_VALUE_ON_ZERO: 该值影响自增长列的插入。默认设置下，插入0或NULL代表生成下一个自增长值。如果用户希望插入的值为0，而该列又是自增长的，那么这个选项就有用了。
+# STRICT_TRANS_TABLES: 在该模式下，如果一个值不能插入到一个事务中，则中断当前的操作，对非事务表不做限制
+# NO_ZERO_IN_DATE: 在严格模式下，不允许日期和月份为零
+# NO_ZERO_DATE: 设置该值，mysql数据库不允许插入零日期，插入零日期会抛出错误而不是警告
+# ERROR_FOR_DIVISION_BY_ZERO: 在insert或update过程中，如果数据被零除，则产生错误而非警告。如果未给出该模式，那么数据被零除时Mysql返回NULL
+# NO_AUTO_CREATE_USER: 禁止GRANT创建密码为空的用户
+# NO_ENGINE_SUBSTITUTION: 如果需要的存储引擎被禁用或未编译，那么抛出错误。不设置此值时，用默认的存储引擎替代，并抛出一个异常
+# PIPES_AS_CONCAT: 将"||"视为字符串的连接操作符而非或运算符，这和Oracle数据库是一样是，也和字符串的拼接函数Concat想类似
+# ANSI_QUOTES: 启用ANSI_QUOTES后，不能用双引号来引用字符串，因为它被解释为识别符
+sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+
+# 表示是本机的序号为1,一般来讲就是master的意思
+server-id = 1
+
+# MySQL每打开一个表，都会读入一些数据到table_open_cache缓存中，当MySQL在这个缓存中找不到相应信息时，才会去磁盘上读取。默认值64
+# 假定系统有200个并发连接，则需将此参数设置为200*N(N为每个连接所需的文件描述符数目)；
+# 当把table_open_cache设置为很大时，如果系统处理不了那么多文件描述符，那么就会出现客户端失效，连接不上
+table_open_cache = 128
+performance_schema_max_table_instances = 200
+table_definition_cache = 100
+
+
+# 默认存储引擎, 此项设置不能设置, 不然容器启动不了(mysql:8.0)
+# default-storage-engine = InnoDB
+
+# 不区分大小写
+lower_case_table_names = 1
+
+####################### binlog #######################
+# 开启 binlog
+log-bin=mysql-bin 
+
+# 选择 ROW 模式
+binlog-format=ROW 
+
+# 自动清理 binlog 日志， 单位天
+expire_logs_days = 15
+
+[client]
+default-character-set=utf8
+
+[mysql]
+default-character-set=utf8
