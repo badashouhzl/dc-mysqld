@@ -7,12 +7,13 @@ cd $g_workPath
 
 . $g_workPath/script/func.sh
 
-g_volumeName=$1
-packName=$g_volumeName.tar.gz
+g_volumeName="$1"
 
-if [ $# -gt 1 ]
+if [ -z "$2" ]
 then
-	packName=$2
+	packName=$g_volumeName.tar.gz
+else
+	packName="$2"
 fi
 
 mkdir -p backup

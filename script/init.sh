@@ -19,15 +19,15 @@ setEnv "gid" "`id -g`" $g_workPath/.env
 
 if [ $# -gt 0 ]
 then
-	if [ $1 == "private" ]
+	if [ "$1" == "private" ]
 	then 
 		setEnv "network" "net-private" $g_workPath/.env \
-		&& sed -i "s/# ipv4_address/ipv4_address/" docker-compose.yaml \
+		&& sed -i "s/^        # ipv4_address/        ipv4_address/" docker-compose.yaml \
 		&& succEcho "convert private success"
-	elif [ $1 == "public" ]
+	elif [ "$1" == "public" ]
 	then
 		setEnv "network" "net-public" $g_workPath/.env \
-		&& sed -i "s/ipv4_address/# ipv4_address/" docker-compose.yaml \
+		&& sed -i "s/^        ipv4_address/        # ipv4_address/" docker-compose.yaml \
 		&& succEcho "convert public success"
 	fi
 fi

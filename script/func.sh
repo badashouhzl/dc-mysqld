@@ -1,15 +1,18 @@
 #!/bin/bash
 
 succEcho() {
-	echo -e "\033[32m$1\033[0m"
+	str="$1"
+	echo -e "\033[32m$str\033[0m"
 }
 
 errEcho() {
-	echo -e "\033[31m$1\033[0m"
+	str="$1"
+	echo -e "\033[31m$str\033[0m"
 }
 
 warnEcho() {
-	echo -e "\033[33m$1\033[0m"
+	str="$1"
+	echo -e "\033[33m$str\033[0m"
 }
 
 execCmd() {
@@ -96,8 +99,8 @@ checkFileExist(){
 # @param $2 环境变量的 值(value)
 # @param $3 环境变量文件 默认值为 .env
 setEnv() {
-	local key=$1
-	local value=$2
+	local key="$1"
+	local value="$2"
 	local file="${3:-.env}"
 
 	if [[ -z "$key" ]]; then
