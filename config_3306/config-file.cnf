@@ -40,17 +40,18 @@ lower_case_table_names = 1
 
 ####################### binlog #######################
 # 开启 binlog
-log-bin=mysql-bin 
+log-bin = mysql-bin 
 
 # 选择 ROW 模式(9.2.0 版本中已经废弃用)
-# binlog-format=ROW 
+# binlog-format = ROW 
 
 # 自动清理 binlog 日志， 单位天
 # expire_logs_days = 15 # 这个配置在 mysql:9.2.0 以上版本中已经废弃，在 9.2.0 之前也可能已经废弃
 binlog_expire_logs_seconds = 1296000  # 15天（15×24×3600）
 
 [client]
-default-character-set=utf8mb4
+default-character-set = utf8mb4
+user = root
 
 [mysql]
-default-character-set=utf8mb4
+default-character-set = utf8mb4

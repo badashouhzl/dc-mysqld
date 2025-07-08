@@ -15,7 +15,7 @@ services:
       MYSQL_ROOT_PASSWORD:              # root 的默认密码
     networks:
       net-custom:
-        # ipv4_address:     # 指定 ip
+        # ipv4_address: 172.19.254.235    # 指定 ip
         aliases: 
           - net-mysqld
 
