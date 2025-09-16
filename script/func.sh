@@ -56,7 +56,7 @@ mkNetworkPrivate(){
 	then
 		succEcho "network ${netName} exist"
 	else
-		execCmd "network create --driver bridge --subnet=172.19.0.0/16 --internal ${netName}" \
+		execCmd "docker network create --driver bridge --subnet=172.19.0.0/16 --internal ${netName}" \
 			"create network ${netName}" \
 			"create network ${netName} fail"
 	fi
